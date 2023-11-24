@@ -19,6 +19,8 @@ public class Main {
                 System.out.print(Math.pow(lst.get(i), 3)+" ");
         }
     }
+
+
     public static void printCubeOdd2(List<Integer> lst){
     }
     public static List<Integer> generateList(int nbElements, int valMin, int valMax){
