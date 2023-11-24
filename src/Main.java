@@ -32,6 +32,14 @@ public class Main {
         }
         return lst;
     }
+    //other way to generate list randomly
+    public static List<Integer> generateList2(int nbElements, int valMin, int valMax){
+        Random rand = new Random();
+
+        return rand.ints(nbElements,valMin,valMax+1)
+                .boxed()
+                .collect(Collectors.toList());
+    }
 
     public static void main(String[] args) {
 
