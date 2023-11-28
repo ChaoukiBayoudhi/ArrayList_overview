@@ -61,6 +61,10 @@ public class Main {
                 .max(Integer::compare)//find the max as Optional<Integer>
                 .get();//get the value of Optional<Integer>
     }
+    //using Collections
+    public static int max3 (List<Integer> lst){
+        return  Collections.max(lst,Integer::compare);
+    }
     //task 5
     public static int countSubString(List<String> lst, String sch){
         int count=0;
@@ -75,6 +79,10 @@ public class Main {
         return lst.stream()
                 .filter(x->x.contains(sch))
                 .count();
+    }
+    //using Collections
+    public static long countSubString3(List<String> lst, String sch){
+        return Collections.frequency(lst,sch);
     }
 
     public static void main(String[] args) {
