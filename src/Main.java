@@ -13,6 +13,7 @@ public class Main {
 //        }
         lst.removeIf(x->x.contains(sch));
     }
+    //task 2
     public static void printCubeOdd(List<Integer> lst){
         for (int i = 0; i < lst.size(); i++) {
             if(lst.get(i)%2!=0)
@@ -22,7 +23,12 @@ public class Main {
 
 
     public static void printCubeOdd2(List<Integer> lst){
+        lst.stream()
+                .filter(x->x%2!=0)
+                .map(x->Math.pow(x,3))
+                .forEach(x->System.out.print(x+" "));
     }
+    //task 3
     public static List<Integer> generateList(int nbElements, int valMin, int valMax){
         Random rand = new Random();
         List<Integer> lst = new ArrayList<>();
@@ -40,8 +46,39 @@ public class Main {
                 .boxed()
                 .collect(Collectors.toList());
     }
+    //task 4 max of list
+    public static int max(List<Integer> lst){
+        int max=lst.get(0);
+        for (int i = 1; i < lst.size(); i++) {
+            if(lst.get(i)>max)
+                max=lst.get(i);
+        }
+        return max;
+    }
+    //using Stream on List
+    public static int max2(List<Integer> lst){
+        return lst.stream()//convert list to stream
+                .max(Integer::compare)//find the max as Optional<Integer>
+                .get();//get the value of Optional<Integer>
+    }
+    //task 5
+    public static int countSubString(List<String> lst, String sch){
+        int count=0;
+        for (int i = 0; i < lst.size(); i++) {
+            if(lst.get(i).contains(sch))
+                count++;
+        }
+        return count;
+    }
+    //using Stream on List
+    public static long countSubString2(List<String> lst, String sch){
+        return lst.stream()
+                .filter(x->x.contains(sch))
+                .count();
+    }
 
     public static void main(String[] args) {
+        //task 1 : strategies to create a list
 
         //create an initialized List of integer
      /*   List<Integer> lst6=new ArrayList<>();
