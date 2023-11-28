@@ -77,13 +77,49 @@ public class Main {
     //using Stream on List
     public static long countSubString2(List<String> lst, String sch){
         return lst.stream()
-                .filter(x->x.contains(sch))
+                .filter(x->x.equals(sch))
+                //.filter(x->x.equalsIgnoreCase(sch))//in case not sensitive to case
                 .count();
     }
     //using Collections
     public static long countSubString3(List<String> lst, String sch){
         return Collections.frequency(lst,sch);
     }
+    //task 6
+public static long upgradeSalary(List<Employee> employees, double increasePercent){
+    int count = 0;
+        for (var e:employees) {
+        if(e.getTitle()==EmployeeTitle.DEVELOPER) {
+            e.setSalary(e.getSalary() * (1 + increasePercent));
+            count++;
+        }
+    }
+        return count;
+}
+//task 7:
+public static double averageOfStringsLength(List<String> lst){
+        return lst.stream()//convert to Stream
+                .map(x->x.length())//get a stream of strings length
+                .mapToDouble(Integer::doubleValue)
+                .average()
+                .getAsDouble();
+}
+public static int menu(){
+    System.out.println("1. create list randomly");
+    System.out.println("2. get list of odd numbers");
+    System.out.println("3. get the maximum");
+    System.out.println("4. get the frequency");
+    System.out.println("5. increase the developers salaries");
+    System.out.println("6. get the average of strings lengths");
+    Scanner sc=new Scanner(System.in);
+    int choice;
+    do{
+        System.out.println("your choice : ");
+        choice=sc.nextInt();
+    }while(choice<0||choice>6);
+return choice;
+}
+
 
     public static void main(String[] args) {
         //task 1 : strategies to create a list
