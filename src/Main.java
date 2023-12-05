@@ -104,74 +104,99 @@ public static double averageOfStringsLength(List<String> lst){
                 .average()
                 .getAsDouble();
 }
-public static int menu(){
-    System.out.println("1. create list randomly");
-    System.out.println("2. get list of odd numbers");
-    System.out.println("3. get the maximum");
-    System.out.println("4. get the frequency");
-    System.out.println("5. increase the developers salaries");
-    System.out.println("6. get the average of strings lengths");
-    Scanner sc=new Scanner(System.in);
-    int choice;
-    do{
-        System.out.println("your choice : ");
-        choice=sc.nextInt();
-    }while(choice<0||choice>6);
-return choice;
-}
+
+
+
+    public static void initialize(List<Integer> lst){
+        if(lst==null)
+            lst=new ArrayList<>();
+        lst.add(1);
+        lst.add(2);
+        lst.add(3);
+        lst.add(11);
+        lst.add(25);
+        lst.add(77);
+    }
+    public static void initialize2(List<Integer> lst){
+        lst=List.of(1,2,3,11,25,77);
+    }
+    public static void initialize3(List<Integer> lst,List<Integer> lst2){
+        if(lst==null)
+            lst=new ArrayList<>(lst2);
+        else
+            lst.addAll(lst2);
+    }
+    //initialize from Array
+    public static void initialize4(List<Integer> lst,int[] arr){
+        for(int i=0;i<arr.length;i++)
+            lst.add(arr[i]);
+    }
+    public static void initialize5(List<Integer> lst){
+        lst=Arrays.asList(1,2,3,11,25,77);
+    }
+    //task 2 : using Math.random()
+    public static List<Integer> generateListRandomly(int nbValues,int minValue,int maxValue){
+        List<Integer> lst=new ArrayList<>();
+        for(int i=0;i<nbValues;i++)
+            lst.add((int)(minValue+Math.random()*(maxValue-minValue+1)));
+
+        return lst;
+    }
+
+    //task 3
+
+
+    //task 4
+    public static  int maxOfOddNumbers(List<Integer> lst){
+        return lst.stream()
+                .filter(x -> x%2!=0)//get the odd numbers
+                .max(Integer::compare)
+                .get();
+    }
+    public static int maxOfList(List<Integer> lst){
+        return  Collections.max(lst, Integer::compare);
+    }
+    public static int menu(){
+        System.out.println("1-Generate a list randomly");
+        System.out.println("2-Get the list of odd values numbers");
+        System.out.println("3-Get the maximum of odd numbers");
+        System.out.println("4-Get the frequency of a substring");
+        System.out.println("5-Increase developers salaries");
+        System.out.println("6-Get the average of strings lengths");
+        System.out.println("7-Exit");
+        int choice;
+        Scanner sc=new Scanner(System.in);
+        do {
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+        }while(choice<1 || choice>7);
+        return choice;
+    }
 
 
     public static void main(String[] args) {
-        //task 1 : strategies to create a list
+       /* System.out.println(Double.MAX_VALUE);
+        System.out.println(Double.MIN_VALUE);
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);*/
+        List<Integer> lst=new ArrayList<>();
+        int choice;
+        do{
+            choice=menu();
+            switch(choice){
+                case 1:
+                    System.out.println("Introduce the number of values: ");
+                    Scanner sc=new Scanner(System.in);
+                    int nbValues=sc.nextInt();
+                    System.out.println("Introduce the minimum value: ");
+                    int minValue=sc.nextInt();
+                    System.out.println("Introduce the maximum value: ");
+                    int maxValue=sc.nextInt();
+                    lst=generateListRandomly(nbValues,minValue,maxValue);
+                    System.out.println(lst);
+                    break;
+            }
 
-        //create an initialized List of integer
-     /*   List<Integer> lst6=new ArrayList<>();
-        List<Integer> lst=new ArrayList<>(20);
-        List<Integer> lst0=List.of(1,14,8,6,9,18,5);
-        List<Integer> lst5=new ArrayList<>(lst0);
-
-        //1-method 1:
-        List<Integer> lst1 = new ArrayList<>(Arrays.asList(1,14,8,6,9,18,5));
-        //method 2:
-        List<Integer> lst2=Arrays.asList(1,14,8,6,9,18,5);
-        //method 3:
-        List<Integer>  lst3=List.of(1,14,8,6,9,18,5);
-        //method 4:
-        List<Integer> lst4=new ArrayList<>();
-        lst4.add(1);lst4.add(14);lst4.add(8);lst4.add(6);lst4.add(9);lst4.add(18);lst4.add(5);
-
-
-
-
-        //show the cube of odd integers
-        //using for i loop
-        printCubeOdd(lst1);
-        System.out.println();
-        //using for each loop
-        for (var x:lst1) {
-            if(x%2!=0)
-                System.out.print(Math.pow(x, 3)+" ");
-        }
-        System.out.println();
-        //using .forEach() method
-        //all the elements
-        lst1.forEach(x->System.out.print(Math.pow(x, 3)+" "));
-*/
-        //create list of Strings
-        /*List<String> lst=new ArrayList<>(Arrays.asList("hello","world","java","programming","language","student","teacher"));
-        System.out.println("before removing :\n"+lst);
-        //remove all the elements that contains "a"
-        removeContains(lst,"a");
-        System.out.println("after removing :\n"+lst);
-
-         */
-        List<Integer> lstRes=generateList(10, 30, 100);
-        //lstRes.forEach(x->System.out.print(x+" "));
-        lstRes.add(lstRes.get(0));
-        System.out.println(lstRes);
-        //remove redundant elements
-        Set<Integer> st=new HashSet<>(lstRes);
-        System.out.println(st);
-
-        }
+        }while(choice!=7);
+    }
 }
